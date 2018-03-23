@@ -1,0 +1,127 @@
+##
+## parse with
+##   grep -v "^#" | awk '{print $1}'
+## 
+## conda available  #######################################
+pydot
+pymc
+theano
+glueviz
+traits
+protobuf
+suds-jurko
+nbpresent
+gensim
+spacy 
+#python-graphviz    ## use graphviz
+graphviz
+csvkit
+sphinx_rtd_theme
+coverage
+pymongo
+basemap
+bcolz
+blist
+cvxopt
+datashader
+datrie
+param
+holoviews
+mdp
+pystan
+qgrid
+incremental
+scrapy
+xray
+runipy
+## pip only  #########################################
+plotly
+tensorflow
+pytest-runner
+bkcharts
+colorcet
+more-itertools
+#pickable-itertools    ## not found
+pomegranate    ## P3 only?
+agate-sql
+appdirs
+argh
+awesome-slugify
+blinker
+json-rpc
+pathtools
+pydotplus
+service-factory
+watchdog
+webencodings
+#wrangle    ## not found
+proj4
+geos
+cartopy    ## requires proj4 & geos but doesn't install them
+#mplot3d    ## not found
+matplotlib-venn
+matplotlib-subsets
+ggplot
+prettyplotlib
+rsa
+entropy
+skidmarks
+pybrain
+sklearn-pandas
+keras
+ptipython
+bhtsne
+fasttext
+hdbscan
+jieba
+konlpy
+zhon
+elasticsearch
+#bs4    ## beautifulsoup4
+deepwalk
+fuzzywuzzy
+hyperopt
+textblob
+igraph
+pyLDAvis
+flexx
+vocab
+milk
+ramp 
+tabulate
+fuel
+python-elm
+sacred
+argparse
+tfidf
+nilearn
+## new stuff    #######################################
+fastparquet
+elasticsearch-loader
+pyarrow
+arrow
+findspark
+projmap
+pandas-profiling
+networkx-viewer
+ipydeps
+ipython-genutils
+jinja2-time
+py4j
+requests-pki
+jupyter-qtconsole-colorschemes
+## pip only, P2 only    #################################
+flanker
+pattern
+cjklib
+rouge    ## non-ascii
+nupic    ## non-ascii (python-dateutil)
+featureforge    ## non-ascii
+## pip only, P3 only    #################################
+orange3
+changepoint
+changepy
+changefinder
+rtchange
+## something missing here
+reindent
