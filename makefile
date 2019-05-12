@@ -6,15 +6,16 @@
 ## site-specific
 GROUP = staff
 SUDO =
-TOP = /users/shared
+#TOP = /users/shared
 
 ## versioning
-AVER = 5.1.0
+#AVER = 5.2.0    ## no longer used
 PVER = 3
-EVER = 36
+EVER = 37
 
 ## install dir
-ANACONDA = $(PWD)/anaconda-$(AVER)
+#ANACONDA = $(PWD)/anaconda-$(AVER)
+ANACONDA = /usr/local/anaconda$(PVER)
 ENVIRON = $(ANACONDA)/envs/py$(EVER)
 PYTHON_EXE = $(ENVIRON)/bin/python$(PVER)
 PIP_EXE = $(ENVIRON)/bin/pip
@@ -51,23 +52,31 @@ wordembeddings:
 ## note that  "make extra EXTRALIST=packagename"  is the preferred way to add more
 EXTRALIST = argparse
 extra: 
-	/usr/bin/env EVER=$(EVER) PVER=$(PVER) AVER=$(AVER) ./installer.bash $(EXTRALIST)
+#	/usr/bin/env EVER=$(EVER) PVER=$(PVER) AVER=$(AVER) ./installer.bash $(EXTRALIST)
+	/usr/bin/env EVER=$(EVER) PVER=$(PVER) ./installer.bash $(EXTRALIST)
 
 ## (2) desired packages in each environment
 LOADLIST = madscience.list
-load: perms
+#load: perms
+load: 
 	for package in `egrep -v "^#|^conda|^anaconda|^python" $(LOADLIST) | awk '{print $$1}'` ; \
 	  do \
 	    $(MAKE) extra EXTRALIST=$$package ; \
 	  done
 
 ## (1) create environments
-env envs: perms py36 py27
+env envs: perms py37 
 	$(SUDO) $(ANACONDA)/bin/conda info -e
+py37: $(ANACONDA)/envs/py37
+$(ANACONDA)/envs/py37:
+	$(SUDO) $(ANACONDA)/bin/conda create -n py37 --clone root
+	@ $(MAKE) load EVER=37 PVER=3 LOADLIST=hunka.list
+#	@ $(MAKE) load EVER=37 PVER=3 LOADLIST=madscience.list
+#	@ $(MAKE) word EVER=37 PVER=3 
 py36: $(ANACONDA)/envs/py36
 $(ANACONDA)/envs/py36:
-	$(SUDO) $(ANACONDA)/bin/conda create -n py36 --clone root
-	@ $(MAKE) load EVER=36 PVER=3 LOADLIST=madscience.list
+	$(SUDO) $(ANACONDA)/bin/conda create -n py36 -y python=3.6
+#	@ $(MAKE) load EVER=36 PVER=3 LOADLIST=madscience.list
 #	@ $(MAKE) word EVER=36 PVER=3 
 py35: $(ANACONDA)/envs/py35
 $(ANACONDA)/envs/py35:
@@ -85,7 +94,7 @@ $(ANACONDA)/envs/py27:
 ## (0) initial install of Anaconda
 init: $(ANACONDA)
 $(ANACONDA): $(SCRIPT)
-	$(SUDO) bash $(SCRIPT) -b -p $(ANACONDA)
+#	$(SUDO) bash $(SCRIPT) -b -p $(ANACONDA)
 #	$(SUDO) ln -s $(ANACONDA)/bin/pip $(ANACONDA)/bin/pip$(PVER)
 	$(ANACONDA)/bin/conda list -n root > root.clist
 	awk '{print tolower($$1)}' root.clist | sort -u > root.plist
@@ -95,16 +104,19 @@ $(ANACONDA): $(SCRIPT)
 perms:
 	$(SUDO) chgrp -R $(GROUP) $(ANACONDA)
 	$(SUDO) find $(ANACONDA) -type d -exec chmod ug+w {} \;
+
 ## package lists
 lists list:
 	$(ANACONDA)/bin/conda list -n root > root.clist
-	$(ANACONDA)/bin/conda list -n py36 > py36.clist
-	$(ANACONDA)/bin/conda list -n py35 > py35.clist
-	$(ANACONDA)/bin/conda list -n py27 > py27.clist
+	$(ANACONDA)/bin/conda list -n py37 > py37.clist
+#	$(ANACONDA)/bin/conda list -n py36 > py36.clist
+#	$(ANACONDA)/bin/conda list -n py35 > py35.clist
+#	$(ANACONDA)/bin/conda list -n py27 > py27.clist
 	awk '{print tolower($$1)}' root.clist | sort -u > root.plist
-	awk '{print tolower($$1)}' py36.clist | sort -u > py36.plist
-	awk '{print tolower($$1)}' py35.clist | sort -u > py35.plist
-	awk '{print tolower($$1)}' py27.clist | sort -u > py27.plist
+	awk '{print tolower($$1)}' py37.clist | sort -u > py37.plist
+#	awk '{print tolower($$1)}' py36.clist | sort -u > py36.plist
+#	awk '{print tolower($$1)}' py35.clist | sort -u > py35.plist
+#	awk '{print tolower($$1)}' py27.clist | sort -u > py27.plist
 
 ##
 clean:

@@ -1,0 +1,15 @@
+
+
+now adapted to use with homebrew's anaconda install
+
+
+##############################################################
+
+
+egrep -v "^#|^conda|^anaconda|^python" hunka.list | awk '{print $1}' | xargs -tn1 /usr/local/anaconda3/bin/conda install -y -q -n py37 2>&1 | tee -a py37.log
+
+grep -A2 ^Packages py37.log | awk 'NF ==2 {print $2}' > noconda.list
+
+egrep -v "^#|^conda|^anaconda|^python" noconda.list | awk '{print $1}' | xargs -tn1 pip install  2>&1 | tee -a py37.log
+
+

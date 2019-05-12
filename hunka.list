@@ -1,0 +1,43 @@
+##
+## parse with
+##   grep -v "^#" | awk '{print $1}'
+## 
+## conda available  #######################################
+pydot
+nbpresent
+graphviz
+csvkit
+basemap
+runipy
+## pip only  #########################################
+plotly
+proj4
+geos
+cartopy    ## requires proj4 & geos but doesn't install them
+matplotlib-venn
+matplotlib-subsets
+ggplot
+prettyplotlib
+sklearn-pandas
+## new stuff    #######################################
+fastparquet
+pyarrow
+arrow
+findspark
+pandas-profiling
+networkx-viewer
+ipydeps
+py4j
+jupyter-qtconsole-colorschemes
+## pip only, P2 only    #################################
+## pip only, P3 only    #################################
+sortedcontainers
+sortedcollections
+pyqtgraph
+cufflinks
+dash
+dash-renderer
+dash-core-components
+dash-html-components
+dash-table-experiments
+folium
