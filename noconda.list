@@ -1,0 +1,16 @@
+matplotlib-venn
+matplotlib-subsets
+ggplot
+prettyplotlib
+sklearn-pandas
+findspark
+networkx-viewer
+ipydeps
+ipython-genutils
+jupyter-qtconsole-colorschemes
+multiprocessing
+cufflinks
+dash
+dash-renderer
+dash-core-components
+dash-html-components
